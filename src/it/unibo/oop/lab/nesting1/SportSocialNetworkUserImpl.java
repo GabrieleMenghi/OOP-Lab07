@@ -101,7 +101,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * Add a new sport followed by this user: if the user already likes or does
      * the sport, nothing happens.
      * 
-     * @param sport
+     * @param f12
      *            a sport followed/done by the user
      */
     // TODO
