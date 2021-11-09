@@ -23,43 +23,35 @@ import it.unibo.oop.lab.socialnetwork.User;
  *            specific {@link User} type
  */
 public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUserImpl<U> {
-
+	/**
+     * Static {@link Sport} constant.
+     */
+    public static final Sport SOCCER = new Sport("soccer");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport SOCCER;
+    public static final Sport F1 = new Sport("f1");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport F1;
+    public static final Sport MOTOGP = new Sport("motogp");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport MOTOGP;
+    public static final Sport VOLLEY = new Sport("volley");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport VOLLEY;
+    public static final Sport BASKET = new Sport("basket");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport BASKET;
-    /**
-     * Static {@link Sport} constant.
-     */
-    public static final Sport BIKE;
+    public static final Sport BIKE = new Sport("bike");
 
     /*
      * TODO: initialize properly these sports
      */
-    static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
-    }
+ 
 
     /**
      * Field meant to keep track of the set of sports followed/done by a user.
@@ -114,6 +106,9 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
+    	if(!sports.contains(sport)) {
+    		sports.add(sport);
+    	}
 
     }
 
@@ -126,7 +121,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return sports.contains(s);
     }
 
     /*
@@ -142,9 +137,26 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
          * Redefine equals so that two sports are equal only if they feature the
          * very same name. Remember that you must also redefine hashCode()!
          */
+    	private final String name;
+    	private int hash;
+    	
+    	public Sport(final String name) {
+    		this.name = name;
+    	}
+    	
         @Override
         public boolean equals(final Object o) {
+            if(this.getClass().equals(o.getClass())) {
+            	return this.name.equals(((Sport) o).name);
+            }
             return false;
         }
+        public int hashCode() {
+        	if(hash == 0) {
+        		hash = this.name.hashCode();
+        	}
+        	return hash;
+        }
     }
+    
 }
